@@ -19,7 +19,3 @@ Run the script using Python. The program captures video from the webcam and disp
 
 ## Contributing
 Contributions to FocuSense are welcome. Please read the CONTRIBUTING.md for guidelines.
-
----
-
-For detailed explanation and development journey, check out the Wiki section.
