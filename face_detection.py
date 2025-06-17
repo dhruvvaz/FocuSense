@@ -1,34 +1,19 @@
 import cv2
-import numpy as np
+import dlib
 
-# Load the model
-net = cv2.dnn.readNetFromCaffe('/users/andrewvaz/Documents/deploy.prototxt', '/users/andrewvaz/Documents/res10_300x300_ssd_iter_140000.caffemodel')
+# Initialize dlib's face detector
+detector = dlib.get_frontal_face_detector()
 
 # Load the image
-image = cv2.imread('/users/andrewvaz/Documents/IMG-9680.jpg')
+image = cv2.imread("path_to_image.jpg")
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-# Get the image dimensions
-(h, w) = image.shape[:2]
+# Detect faces in the image
+faces = detector(gray, 0)
 
-# Preprocess the image to create a blob and perform forward pass to get the detections
-blob = cv2.dnn.blobFromImage(cv2.resize(image, (300, 300)), 1.0, (300, 300), (104.0, 177.0, 123.0))
-net.setInput(blob)
-detections = net.forward()
-
-# Loop over the detections and draw boxes around the detected faces
-for i in range(0, detections.shape[2]):
-    confidence = detections[0, 0, i, 2]
-
-    # Ensure the confidence is above a threshold
-    if confidence > 0.5:
-        # Compute the (x, y)-coordinates of the bounding box
-        box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
-        (startX, startY, endX, endY) = box.astype("int")
-        
-        # Draw the bounding box of the face with the probability
-        text = "{:.2f}%".format(confidence * 100)
-        cv2.rectangle(image, (startX, startY), (endX, endY), (0, 255, 0), 2)
-        cv2.putText(image, text, (startX, startY - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 2)
+for face in faces:
+    (startX, startY, endX, endY) = (face.left(), face.top(), face.right(), face.bottom())
+    cv2.rectangle(image, (startX, startY), (endX, endY), (0, 255, 0), 2)
 
 # Show the output image with detected faces
 cv2.imshow("Detected Faces", image)
