@@ -8,11 +8,9 @@ FocuSense is an advanced facial recognition system developed to analyze user eng
 2. **Install Dependencies**: You will need OpenCV, dlib, and scipy. Use `pip install opencv-python dlib scipy`.
 
 ## Setup
-- Download the required model files:
-  - [[deploy.prototxt](https://github.com/BVLC/caffe/blob/master/models/bvlc_reference_caffenet/deploy.prototxt)](#)
-  - [[res10_300x300_ssd_iter_140000.caffemodel](https://github.com/gopinath-balu/computer_vision/blob/master/CAFFE_DNN/res10_300x300_ssd_iter_140000.caffemodel)](#)
-  - [[shape_predictor_68_face_landmarks.dat](https://github.com/italojs/facial-landmarks-recognition/blob/master/shape_predictor_68_face_landmarks.dat)](#)
-- Place these files in the appropriate directory as referenced in the code.
+- Download the required model file:
+  - [shape_predictor_68_face_landmarks.dat](https://github.com/italojs/facial-landmarks-recognition/blob/master/shape_predictor_68_face_landmarks.dat)
+- Place this file in the same directory as the Python scripts or update the path in the code.
 
 ## Usage
 Run the script using Python. The program captures video from the webcam and displays the engagement level in real-time.
